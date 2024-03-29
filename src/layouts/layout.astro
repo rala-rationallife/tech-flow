@@ -1,14 +1,15 @@
 ---
-import Meta from "@components/meta.astro";
 import Header from "@components/header.astro";
 import Footer from "@components/footer.astro";
-
-const props = Astro.props;
 ---
 
-<html lang="en">
+<html lang="ja">
   <head>
-    <Meta {...props} />
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.png" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>Tech Flow.</title>
   </head>
   <body>
     <Header />
