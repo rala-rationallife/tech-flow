@@ -1,28 +1,57 @@
 :root {
+  --text: #555555;
+  --base-color: blue;
+  --main-color: #6297b1;
+  --twitter: #1da1f2;
+  --white: #ffffff;
   --body: clamp(1rem, 0.9504rem + 0.2116vw, 1.125rem); /* 16px - 18px */
+  --heading1: calc(var(--body) * 1.8);
+  --heading2: calc(var(--body) * 1.6);
+  --heading3: calc(var(--body) * 1.4);
+  --space-line: calc(var(--body) * 1.8);
 }
 
-*,
-::before,
-::after {
-  box-sizing: border-box;
-  margin: 0;
-}
-
-/* スクロールバー */
-html {
-  scrollbar-gutter: stable;
-
-  @supports not (scrollbar-gutter: stable) {
-    overflow-y: scroll;
-  }
-}
-
-/* タイポグラフィ */
 body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial,
     sans-serif;
   -webkit-text-size-adjust: none;
+  font-size: var(--body);
+  color: var(--text);
+}
+
+h1 {
+  font-size: var(--heading1);
+}
+
+h2 {
+  font-size: var(--heading2);
+}
+
+h3 {
+  font-size: var(--heading3);
+}
+
+p {
+  font-size: var(--body);
+  line-height: 1.8;
+}
+
+body,
+h1,
+h2,
+h3,
+p,
+figure,
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
 
 img {
@@ -31,18 +60,22 @@ img {
   vertical-align: bottom;
 }
 
-/* リスト */
-ul {
-  padding: 0;
-  list-style: none;
-}
-
-/* リンク */
 a {
   color: inherit;
   text-decoration: none;
 
-  &:hover {
-    text-decoration: underline;
+  @media (hover: none) {
+    -webkit-tap-highlight-color: transparent;
   }
+}
+
+.sr-only {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
 }

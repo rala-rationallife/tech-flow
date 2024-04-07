@@ -11,10 +11,20 @@
     "astro": "astro"
   },
   "dependencies": {
-    "astro": "^4.5.10"
+    "@astrojs/react": "^3.1.1",
+    "@fortawesome/fontawesome-svg-core": "^6.5.2",
+    "@fortawesome/free-brands-svg-icons": "^6.5.2",
+    "@fortawesome/free-regular-svg-icons": "^6.5.2",
+    "@fortawesome/free-solid-svg-icons": "^6.5.2",
+    "@fortawesome/react-fontawesome": "^0.2.0",
+    "astro": "^4.5.10",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
   },
   "devDependencies": {
     "@astrojs/check": "^0.5.10",
+    "@types/react": "^18.2.74",
+    "@types/react-dom": "^18.2.24",
     "prettier": "^3.2.5",
     "prettier-plugin-astro": "^0.13.0",
     "typescript": "^5.4.3"

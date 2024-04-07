@@ -1,11 +1,20 @@
 ---
-
+import { faGithub, faTwitter } from "@fortawesome/free-brands-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 ---
 
 <footer class="footer">
   <ul>
-    <li><a href="https://twitter.com/">Twitter</a></li>
-    <li><a href="https://github.com/">GitHub</a></li>
+    <li>
+      <a href="https://twitter.com/" target="_blank" rel="noreferrer">
+        <FontAwesomeIcon icon={faTwitter} />
+      </a>
+    </li>
+    <li>
+      <a href="https://github.com/" target="_blank" rel="noreferrer">
+        <FontAwesomeIcon icon={faGithub} />
+      </a>
+    </li>
   </ul>
 </footer>
 
@@ -19,8 +28,9 @@
       display: grid;
       justify-content: center;
       grid-auto-flow: column;
-      gap: var(--body);
+      gap: calc(var(--body) * 2);
       padding: calc(var(--body) * 2);
+      font-size: calc(var(--body) * 2);
     }
   }
 </style>
