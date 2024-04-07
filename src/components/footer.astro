@@ -2,9 +2,25 @@
 
 ---
 
-<footer>
+<footer class="footer">
   <ul>
     <li><a href="https://twitter.com/">Twitter</a></li>
     <li><a href="https://github.com/">GitHub</a></li>
   </ul>
 </footer>
+
+<style>
+  .footer {
+    display: grid;
+    grid-template-columns: subgrid;
+
+    > ul {
+      grid-column: 2 / -2;
+      display: grid;
+      justify-content: center;
+      grid-auto-flow: column;
+      gap: var(--body);
+      padding: calc(var(--body) * 2);
+    }
+  }
+</style>

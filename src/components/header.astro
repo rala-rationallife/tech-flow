@@ -2,12 +2,14 @@
 
 ---
 
-<header>
-  <nav>
-    <a href="/">
-      <img src="/favicon.png" alt="" width="28" height="28" />
-      Tech Flow.
-    </a>
+<header class="header">
+  <nav class="nav">
+    <div class="logo">
+      <a href="/"><img src="/favicon.png" alt="" width="28" height="28" /></a>
+    </div>
+    <div class="site">
+      <a href="/"> Tech Flow. </a>
+    </div>
     <ul>
       <li>
         <a href="/">Home</a>
@@ -18,3 +20,26 @@
     </ul>
   </nav>
 </header>
+
+<style>
+  .header {
+    display: grid;
+    grid-template-columns: subgrid;
+    padding-block: var(--body);
+
+    > .nav {
+      grid-column: 2 / -2;
+      display: grid;
+      grid-auto-flow: column;
+      grid-template-columns: minmax(0, auto) minmax(0, 1fr);
+      gap: calc(var(--body) / 2);
+      align-items: center;
+
+      > ul {
+        display: grid;
+        grid-auto-flow: column;
+        gap: var(--body);
+      }
+    }
+  }
+</style>
