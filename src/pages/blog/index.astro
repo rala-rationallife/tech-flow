@@ -1,0 +1,45 @@
+---
+import Layout from "@layouts/layout.astro";
+
+import { getCollection, type CollectionEntry } from "astro:content";
+import { compareDesc } from "date-fns";
+
+interface Post {
+  slug: string;
+  data: {
+    image: string;
+    title: string;
+    pubDate: number | Date;
+    modDate?: number | Date;
+  };
+}
+
+const blogPosts = await getCollection("blog");
+const sortedBlogPosts = blogPosts.sort((a, b) =>
+  compareDesc(a.data.pubDate, b.data.pubDate),
+);
+---
+
+<Layout>
+  <h1>Tech Flow.</h1>
+
+  <div>
+    {
+      sortedBlogPosts.map((post) => {
+        return (
+          <article>
+            <a href={`/blog/${post.slug}/`}>{post.data.title}</a>
+          </article>
+        );
+      })
+    }
+  </div>
+</Layout>
+
+<style is:global>
+  main {
+    display: grid;
+    justify-content: center;
+    align-items: center;
+  }
+</style>
