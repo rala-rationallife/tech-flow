@@ -1,0 +1,76 @@
+---
+import Layout from "@layouts/layout.astro";
+import Card from "@components/card.astro";
+
+import { getCollection } from "astro:content";
+import { compareDesc, format, formatISO } from "date-fns";
+import type { GetStaticPathsOptions } from "astro";
+import Pagination from "@components/pagination.astro";
+
+export async function getStaticPaths({ paginate }: GetStaticPathsOptions) {
+  const blogPosts = await getCollection("blog", ({ data }) => {
+    return data.isDraft !== true;
+  });
+  const sortedBlogPosts = blogPosts.sort((a, b) =>
+    compareDesc(a.data.pubDate, b.data.pubDate),
+  );
+  return paginate(sortedBlogPosts, { pageSize: 6 });
+}
+
+const {
+  page: {
+    data,
+    url: { prev, next },
+  },
+} = Astro.props;
+---
+
+<Layout pageTitle="Blog Posts" description="ブログの記事一覧">
+  <div class="grid">
+    {
+      data.map((post) => {
+        const {
+          slug,
+          data: { image, title, pubDate, modDate },
+        } = post;
+
+        const pubDateISO = modDate ? formatISO(modDate) : formatISO(pubDate);
+        const pubDateJA = modDate
+          ? format(modDate, "yyyy年MM月dd日")
+          : format(pubDate, "yyyy年MM月dd日");
+
+        return (
+          <Card
+            url={`/blog/${slug}/`}
+            src={image}
+            title={title}
+            pubDateISO={pubDateISO}
+            pubDateJA={pubDateJA}
+            isModified={!!modDate}
+          />
+        );
+      })
+    }
+  </div>
+
+  <Pagination prev={prev} next={next} />
+</Layout>
+
+<style is:global>
+  main {
+    display: grid;
+    gap: var(--body);
+    align-content: start;
+  }
+</style>
+
+<style>
+  .grid {
+    display: grid;
+    gap: var(--body);
+
+    @media (width >= 768px) {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    }
+  }
+</style>

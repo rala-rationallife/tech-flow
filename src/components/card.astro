@@ -1,0 +1,32 @@
+---
+const { url, src, alt = "", title } = Astro.props;
+
+interface Props {
+  url: string;
+  src: string;
+  alt?: string;
+  title: string;
+  pubDateISO?: string;
+  pubDateJA?: string;
+  isModified?: boolean;
+}
+---
+
+<article>
+  <a href={url}>
+    <img src={src} alt={alt} />
+    <h2>{title}</h2>
+  </a>
+</article>
+
+<style>
+  img {
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+  }
+
+  h2 {
+    font-size: var(--body);
+    font-weight: normal;
+  }
+</style>

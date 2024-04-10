@@ -1,5 +1,7 @@
 ---
 import { siteMeta } from "@lib/constants";
+import { ViewTransitions } from "astro:transitions";
+
 const { siteTitle, siteDesc, siteLocale, siteType, siteIcon, siteImg } =
   siteMeta;
 
@@ -46,3 +48,4 @@ const socialImageURL = new URL(pageImg, import.meta.env.PUBLIC_SITE_URL);
 <link rel="apple-touch-icon" href={siteIcon} />
 <meta property="og:image" content={socialImageURL} />
 <meta name="twitter:card" content="summary_large_image" />
+<ViewTransitions />

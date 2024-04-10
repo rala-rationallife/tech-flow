@@ -1,0 +1,45 @@
+---
+interface Props {
+  prev?: string;
+  next?: string;
+  prevTitle?: string;
+  nextTitle?: string;
+}
+
+const { prev, next, prevTitle = "前へ", nextTitle = "次へ" } = Astro.props;
+---
+
+<div>
+  {prev ? <a href={prev}>← {prevTitle}</a> : ""}
+  {
+    next ? (
+      <a href={next} class="next">
+        {nextTitle} →
+      </a>
+    ) : (
+      ""
+    )
+  }
+</div>
+
+<style>
+  div {
+    justify-self: center;
+    display: grid;
+    gap: var(--body);
+    width: 100%;
+    max-width: 768px;
+  }
+
+  a {
+    border-radius: calc(var(--body) * 0.5);
+    box-shadow:
+      0 1px 2px 0 rgba(24, 44, 84, 0.1),
+      0 1px 3px 1px #182c541a;
+    padding: var(--body);
+  }
+
+  .next {
+    text-align: right;
+  }
+</style>
