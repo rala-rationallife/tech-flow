@@ -41,7 +41,7 @@ const {
 
         return (
           <Card
-            url={`/blog/${slug}/`}
+            url={`/blog/post/${slug}/`}
             src={image}
             title={title}
             pubDateISO={pubDateISO}
@@ -67,7 +67,7 @@ const {
 <style>
   .grid {
     display: grid;
-    gap: var(--body);
+    gap: calc(var(--body) * 2);
 
     @media (width >= 768px) {
       grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);

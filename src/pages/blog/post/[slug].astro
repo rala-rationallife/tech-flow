@@ -1,0 +1,71 @@
+---
+import Layout from "@layouts/layout.astro";
+import type { CollectionEntry } from "astro:content";
+import { getCollection } from "astro:content";
+import { compareDesc, format, formatISO } from "date-fns";
+
+interface Props {
+  post: CollectionEntry<"blog">;
+  url: {
+    prev?: string;
+    next?: string;
+    prevTitle?: string;
+    nextTitle?: string;
+  };
+}
+
+export async function getStaticPaths({}) {
+  const blogPosts = await getCollection("blog", ({ data }) => {
+    return data.isDraft !== true;
+  });
+  const sortedBlogPosts = blogPosts.sort((a, b) =>
+    compareDesc(a.data.pubDate, b.data.pubDate),
+  );
+  const numberOfPosts = blogPosts.length;
+
+  return sortedBlogPosts.map((post) => {
+    const { slug } = post;
+    const currentPage = sortedBlogPosts.findIndex((post) => post.slug === slug);
+
+    const prev =
+      currentPage + 1 >= numberOfPosts
+        ? {}
+        : {
+            prevTitle: sortedBlogPosts[currentPage + 1].data.title,
+            prev: `/blog/post/${sortedBlogPosts[currentPage + 1].slug}/`,
+          };
+
+    const next =
+      currentPage - 1 < 0
+        ? {}
+        : {
+            nextTitle: sortedBlogPosts[currentPage - 1].data.title,
+            next: `/blog/post/${sortedBlogPosts[currentPage - 1].slug}/`,
+          };
+
+    return { params: { slug }, props: { post, url: { ...prev, ...next } } };
+  });
+}
+
+const { post, url } = Astro.props;
+const { Content } = await post.render();
+
+const {
+  data: { title, pubDate, modDate, image, category, description },
+  slug,
+} = post;
+
+const pubDateISO = formatISO(pubDate);
+const modDateISO = modDate && formatISO(modDate);
+
+const pubDateJA = format(pubDate, "yyyy年MM月dd日");
+const modDateJA = modDate && format(modDate, "yyyy年MM月dd日");
+
+const blogUrl = `${import.meta.env.PUBLIC_SITE_URL}/blog/post/${slug}/`;
+---
+
+<Layout>
+  <article>
+    <h1>記事タイトル</h1>
+  </article>
+</Layout>
