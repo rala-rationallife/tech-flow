@@ -1,5 +1,6 @@
 ---
 import Layout from "@layouts/layout.astro";
+import { Picture } from "astro:assets";
 import type { CollectionEntry } from "astro:content";
 import { getCollection } from "astro:content";
 import { compareDesc, format, formatISO } from "date-fns";
@@ -51,7 +52,7 @@ const { post, url } = Astro.props;
 const { Content } = await post.render();
 
 const {
-  data: { title, pubDate, modDate, image, category, description },
+  data: { title, pubDate, modDate, image, pageImg, category, description },
   slug,
 } = post;
 
@@ -64,8 +65,40 @@ const modDateJA = modDate && format(modDate, "yyyy年MM月dd日");
 const blogUrl = `${import.meta.env.PUBLIC_SITE_URL}/blog/post/${slug}/`;
 ---
 
-<Layout>
+<Layout pageTitle={title} description={description} pageImg={pageImg}>
   <article>
-    <h1>記事タイトル</h1>
+    <div class="post-head">
+      <h1>{title}</h1>
+      <Picture src={image} alt={title} />
+
+      <div>
+        <time datetime={pubDateISO}>{pubDateJA}</time>
+      </div>
+    </div>
   </article>
 </Layout>
+
+<style is:global>
+  main {
+    display: grid;
+    gap: var(--body);
+
+    @media (width >= 900px) {
+      gap: calc(var(--body) * 2);
+      grid-template-columns: repeat(12, minmax(0, 1fr));
+    }
+  }
+</style>
+
+<style>
+  article {
+    @media (width >= 900px) {
+      grid-column: 1 / 9;
+    }
+  }
+
+  .post-head {
+    display: grid;
+    gap: var(--body);
+  }
+</style>
