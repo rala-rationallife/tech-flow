@@ -1,10 +1,10 @@
 ---
-import Layout from "@layouts/layout.astro";
-import Card from "@components/card.astro";
-
 import { getCollection } from "astro:content";
 import { compareDesc, format, formatISO } from "date-fns";
 import type { GetStaticPathsOptions } from "astro";
+import { categories } from "@lib/constants";
+import Layout from "@layouts/layout.astro";
+import Card from "@components/card.astro";
 import Pagination from "@components/pagination.astro";
 
 export async function getStaticPaths({ paginate }: GetStaticPathsOptions) {
@@ -14,7 +14,19 @@ export async function getStaticPaths({ paginate }: GetStaticPathsOptions) {
   const sortedBlogPosts = blogPosts.sort((a, b) =>
     compareDesc(a.data.pubDate, b.data.pubDate),
   );
-  return paginate(sortedBlogPosts, { pageSize: 6 });
+  return categories.flatMap((category) => {
+    const { categorySlug, categoryName } = category;
+
+    const filteredPosts = sortedBlogPosts.filter((post) => {
+      return post.data.category.includes(categorySlug);
+    });
+
+    return paginate(filteredPosts, {
+      params: { categorySlug },
+      props: { categoryName },
+      pageSize: 6,
+    });
+  });
 }
 
 const {
@@ -22,10 +34,13 @@ const {
     data,
     url: { prev, next },
   },
+  categoryName,
 } = Astro.props;
 ---
 
-<Layout pageTitle="Blog Posts" description="ブログの記事一覧">
+<Layout pageTitle={categoryName} description={`${categoryName}の記事一覧`}>
+  <h1>{categoryName}</h1>
+
   <div class="grid">
     {
       data.map((post) => {
@@ -65,6 +80,10 @@ const {
 </style>
 
 <style>
+  h1 {
+    text-align: center;
+  }
+
   .grid {
     display: grid;
     gap: calc(var(--body) * 2);

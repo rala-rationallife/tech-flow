@@ -4,6 +4,8 @@ import { Picture } from "astro:assets";
 import type { CollectionEntry } from "astro:content";
 import { getCollection } from "astro:content";
 import { compareDesc, format, formatISO } from "date-fns";
+import { categories } from "@lib/constants";
+import "github-markdown-css/github-markdown-light.css";
 
 interface Props {
   post: CollectionEntry<"blog">;
@@ -73,7 +75,27 @@ const blogUrl = `${import.meta.env.PUBLIC_SITE_URL}/blog/post/${slug}/`;
 
       <div>
         <time datetime={pubDateISO}>{pubDateJA}</time>
+
+        <div class="categories">
+          {
+            category.map((categorySlug) => {
+              const categoryName = categories?.find(
+                (cat) => cat.categorySlug === categorySlug,
+              )?.categoryName;
+              return (
+                <a href={`/blog/category/${categorySlug}/`}>
+                  <span>#</span>
+                  <span>{categoryName}</span>
+                </a>
+              );
+            })
+          }
+        </div>
       </div>
+    </div>
+
+    <div class="markdown-body">
+      <Content components={{ img: Picture }} />
     </div>
   </article>
 </Layout>
@@ -88,10 +110,60 @@ const blogUrl = `${import.meta.env.PUBLIC_SITE_URL}/blog/post/${slug}/`;
       grid-template-columns: repeat(12, minmax(0, 1fr));
     }
   }
+
+  .markdown-body {
+    color: var(--text);
+
+    h1,
+    h2,
+    h3 {
+      border: none;
+      padding: 0;
+    }
+
+    h1 {
+      font-size: var(--heading1);
+    }
+
+    h2 {
+      font-size: var(--heading2);
+      margin-block: calc(var(--space-line) * 3) var(--space-line);
+      padding-top: var(--space-line);
+    }
+
+    h3 {
+      font-size: var(--heading3);
+      margin-block: var(--space-line);
+      padding-top: var(--space-line);
+    }
+
+    p,
+    pre {
+      font-size: var(--body);
+      line-height: 1.8;
+      margin-block: var(--space-line);
+    }
+
+    pre {
+      padding: var(--body);
+    }
+
+    p:has(> picture) {
+      margin-block: calc(var(--space-line) * 2) var(--body);
+
+      & + p {
+        margin-top: var(--body);
+      }
+    }
+  }
 </style>
 
 <style>
   article {
+    display: grid;
+    gap: calc(var(--body) * 2);
+    grid-template-columns: minmax(0, auto);
+
     @media (width >= 900px) {
       grid-column: 1 / 9;
     }
@@ -100,5 +172,12 @@ const blogUrl = `${import.meta.env.PUBLIC_SITE_URL}/blog/post/${slug}/`;
   .post-head {
     display: grid;
     gap: var(--body);
+  }
+
+  .categories {
+    display: flex;
+    column-gap: var(--body);
+    flex-wrap: wrap;
+    color: var(--twitter);
   }
 </style>

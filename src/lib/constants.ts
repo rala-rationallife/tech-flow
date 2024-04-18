@@ -7,3 +7,8 @@ export const siteMeta = {
   siteIcon: "/favicon.png",
   siteImg: "/ogp.png",
 };
+
+export const categories = [
+  { categoryName: "Python", categorySlug: "python" },
+  { categoryName: "JavaScript", categorySlug: "javascript" },
+];
