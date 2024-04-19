@@ -1,6 +1,10 @@
 # Astro Starter Kit: Minimal
 
 ```sh
+yarn create astro@latest --template rala-rationallife/tech-flow
+```
+
+```sh
 npm create astro@latest -- --template minimal
 ```
 
