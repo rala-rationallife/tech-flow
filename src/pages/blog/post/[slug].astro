@@ -1,5 +1,6 @@
 ---
 import Layout from "@layouts/layout.astro";
+import Pagination from "@components/pagination.astro";
 import { Picture } from "astro:assets";
 import type { CollectionEntry } from "astro:content";
 import { getCollection } from "astro:content";
@@ -97,6 +98,8 @@ const blogUrl = `${import.meta.env.PUBLIC_SITE_URL}/blog/post/${slug}/`;
     <div class="markdown-body">
       <Content components={{ img: Picture }} />
     </div>
+
+    <Pagination {...url} />
   </article>
 </Layout>
 
@@ -111,48 +114,54 @@ const blogUrl = `${import.meta.env.PUBLIC_SITE_URL}/blog/post/${slug}/`;
     }
   }
 
-  .markdown-body {
-    color: var(--text);
+  body {
+    .markdown-body {
+      color: var(--text);
 
-    h1,
-    h2,
-    h3 {
-      border: none;
-      padding: 0;
-    }
+      h1,
+      h2,
+      h3 {
+        border: none;
+        padding: 0;
+      }
 
-    h1 {
-      font-size: var(--heading1);
-    }
+      h1 {
+        font-size: var(--heading1);
+      }
 
-    h2 {
-      font-size: var(--heading2);
-      margin-block: calc(var(--space-line) * 3) var(--space-line);
-      padding-top: var(--space-line);
-    }
+      h2 {
+        font-size: var(--heading2);
+        margin-block: calc(var(--space-line) * 3) var(--space-line);
+        padding-top: var(--space-line);
 
-    h3 {
-      font-size: var(--heading3);
-      margin-block: var(--space-line);
-      padding-top: var(--space-line);
-    }
+        & + p {
+          margin-top: 0;
+        }
+      }
 
-    p,
-    pre {
-      font-size: var(--body);
-      line-height: 1.8;
-      margin-block: var(--space-line);
-    }
+      h3 {
+        font-size: var(--heading3);
+        margin-block: var(--space-line);
+        padding-top: var(--space-line);
+      }
 
-    pre {
-      padding: var(--body);
-    }
+      p,
+      pre {
+        font-size: var(--body);
+        line-height: 1.8;
+        margin-block: var(--space-line);
+      }
 
-    p:has(> picture) {
-      margin-block: calc(var(--space-line) * 2) var(--body);
+      pre {
+        padding: var(--body);
+      }
 
-      & + p {
-        margin-top: var(--body);
+      p:has(> picture) {
+        margin-block: calc(var(--space-line) * 2) var(--body);
+
+        & + p {
+          margin-top: var(--body);
+        }
       }
     }
   }
