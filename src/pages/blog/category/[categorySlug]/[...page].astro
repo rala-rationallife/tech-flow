@@ -68,7 +68,7 @@ const {
     }
   </div>
 
-  <Pagination prev={prev} next={next} />
+  {next && <Pagination prev={prev} next={next} />}
 </Layout>
 
 <style is:global>

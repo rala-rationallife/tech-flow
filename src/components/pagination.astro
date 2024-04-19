@@ -9,20 +9,18 @@ interface Props {
 const { prev, next, prevTitle = "前へ", nextTitle = "次へ" } = Astro.props;
 ---
 
-{
-  next && (
-    <div>
-      {prev ? <a href={prev}>← {prevTitle}</a> : ""}
-      {next ? (
-        <a href={next} class="next">
-          {nextTitle} →
-        </a>
-      ) : (
-        ""
-      )}
-    </div>
-  )
-}
+<div>
+  {prev ? <a href={prev}>← {prevTitle}</a> : ""}
+  {
+    next ? (
+      <a href={next} class="next">
+        {nextTitle} →
+      </a>
+    ) : (
+      ""
+    )
+  }
+</div>
 
 <style>
   div {
