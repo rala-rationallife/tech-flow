@@ -1,0 +1,18 @@
+---
+import Layout from "@layouts/layout.astro";
+---
+
+<Layout pageTitle="404 - Page not found">
+  <h1>404</h1>
+  <p>ページが見つかりません</p>
+  <a href="/blog/">{`>> 記事一覧へ`}</a>
+</Layout>
+
+<style is:global>
+  main {
+    display: grid;
+    gap: var(--body);
+    justify-items: center;
+    align-content: center;
+  }
+</style>
