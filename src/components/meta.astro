@@ -13,13 +13,7 @@ interface Props {
   modDate?: string;
 }
 
-const {
-  pageTitle,
-  description = siteDesc,
-  pageImg = siteImg,
-  pubDate,
-  modDate,
-} = Astro.props;
+const { pageTitle, description = siteDesc, pageImg = siteImg } = Astro.props;
 
 const title = pageTitle ? `${pageTitle} | ${siteTitle}` : siteTitle;
 

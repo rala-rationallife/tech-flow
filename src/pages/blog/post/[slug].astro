@@ -68,7 +68,13 @@ const modDateJA = modDate && format(modDate, "yyyy年MM月dd日");
 const blogUrl = `${import.meta.env.PUBLIC_SITE_URL}/blog/post/${slug}/`;
 ---
 
-<Layout pageTitle={title} description={description} pageImg={pageImg}>
+<Layout
+  pageTitle={title}
+  description={description}
+  pageImg={pageImg}
+  publishDate={pubDateJA}
+  updateDate={modDateJA}
+>
   <article>
     <div class="post-head">
       <h1>{title}</h1>

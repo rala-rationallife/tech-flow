@@ -1,0 +1,36 @@
+---
+import { siteMeta } from "@lib/constants";
+
+interface Props {
+  pageTitle?: string;
+  publishDate?: string;
+  updateDate?: string;
+  pageImg?: string;
+}
+
+const { siteTitle, sitePub, siteImg } = siteMeta;
+
+const {
+  pageTitle = siteTitle,
+  publishDate = sitePub,
+  updateDate,
+  pageImg = siteImg,
+} = Astro.props;
+
+const jsonLdConfigs = {
+  "@context": "http://schema.org",
+  "@type": "Article",
+  headline: pageTitle,
+  datePublished: publishDate,
+  dateModified: updateDate,
+  image: new URL(pageImg, import.meta.env.PUBLIC_SITE_URL),
+  url: new URL(Astro.url.pathname, import.meta.env.PUBLIC_SITE_URL),
+  author: {
+    "@type": "Person",
+    name: "Rala",
+    url: "https://twitter.com/radiologis2",
+  },
+};
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(jsonLdConfigs)} />

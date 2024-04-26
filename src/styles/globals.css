@@ -79,3 +79,22 @@ a {
   position: absolute;
   width: 1px;
 }
+
+.global_grid {
+  display: grid;
+  grid-template-columns: minmax(2%, 1fr) minmax(auto, 1166px) minmax(2%, 1fr);
+  grid-template-rows: minmax(0, auto) minmax(0, 1fr) minmax(0, auto);
+  min-height: 100svh;
+
+  @media (width >= 768px) {
+    grid-template-columns: minmax(4%, 1fr) minmax(auto, 1166px) minmax(4%, 1fr);
+  }
+
+  > * {
+    grid-column: 1 / -1;
+  }
+
+  > main {
+    grid-column: 2 / -2;
+  }
+}
