@@ -6,7 +6,7 @@ export const siteMeta = {
   siteLocale: "ja_JP",
   siteIcon: "/favicon.png",
   siteImg: "/ogp.png",
-  sitePub: "2024年04月01日",
+  sitePub: "2024-04-01T08:00:00+08:00",
 };
 
 export const categories = [
