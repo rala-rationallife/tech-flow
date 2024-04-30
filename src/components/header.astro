@@ -1,5 +1,5 @@
 ---
-
+import { NavMenu } from "@components/nav-menu";
 ---
 
 <header class="header">
@@ -10,14 +10,8 @@
     <div class="site">
       <a href="/"> Tech Flow. </a>
     </div>
-    <ul>
-      <li>
-        <a href="/">Home</a>
-      </li>
-      <li>
-        <a href="/blog/">Blog</a>
-      </li>
-    </ul>
+
+    <NavMenu client:load />
   </nav>
 </header>
 
@@ -25,7 +19,7 @@
   .header {
     display: grid;
     grid-template-columns: subgrid;
-    padding-block: calc(var(--body) * 2);
+    padding-block: var(--body);
     font-size: var(--heading3);
 
     > .nav {
@@ -35,12 +29,6 @@
       grid-template-columns: minmax(0, auto) minmax(0, 1fr);
       gap: calc(var(--body) / 2);
       align-items: center;
-
-      > ul {
-        display: grid;
-        grid-auto-flow: column;
-        gap: var(--body);
-      }
     }
   }
 </style>
