@@ -1,7 +1,6 @@
 .list {
   display: grid;
   grid-auto-flow: column;
-  gap: var(--body);
 
   @media (width <= 767px) {
     position: fixed;
@@ -10,11 +9,17 @@
     background: rgba(256, 256, 256, 0.9);
     transition: transform 0.4s;
     grid-auto-flow: revert;
-    gap: calc(var(--body) * 2.5);
     place-content: center;
     font-size: var(--heading2);
     text-align: center;
     overflow-y: auto;
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: 80px auto 80px;
+
+    > * {
+      grid-row: 2;
+    }
   }
 
   a {
@@ -35,6 +40,17 @@
 .list_open {
   composes: list;
   transform: translateX(-100%);
+}
+
+.ul {
+  display: grid;
+  grid-auto-flow: column;
+  gap: var(--body);
+
+  @media (width <= 767px) {
+    grid-auto-flow: revert;
+    overflow-y: auto;
+  }
 }
 
 .btn {

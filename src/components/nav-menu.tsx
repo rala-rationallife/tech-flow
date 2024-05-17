@@ -39,59 +39,73 @@ export function NavMenu() {
         )}
       </button>
 
-      <ul className={navIsOpen ? styles.list_open : styles.list}>
-        <li>
-          <a href="/">Home</a>
-        </li>
-        <li>
-          <a href="/blog/">Blog</a>
-        </li>
-        <li>
-          <a href="/blog/">Blog</a>
-        </li>
-        <li>
-          <a href="/blog/">Blog</a>
-        </li>
-        <li>
-          <a href="/blog/">Blog</a>
-        </li>
-        <li>
-          <a href="/blog/">Blog</a>
-        </li>
-        <li>
-          <a href="/blog/">Blog</a>
-        </li>
-        <li>
-          <a href="/blog/">Blog</a>
-        </li>
-        <li>
-          <a href="/blog/">Blog</a>
-        </li>
-        <li>
-          <a href="/blog/">Blog</a>
-        </li>
-        <li>
-          <a href="/blog/">Blog</a>
-        </li>
-        <li>
-          <a href="/blog/">Blog</a>
-        </li>
-        <li>
-          <a href="/blog/">Blog</a>
-        </li>
-        <li>
-          <a href="/blog/">Blog</a>
-        </li>
-        <li>
-          <a href="/blog/">Blog</a>
-        </li>
-        <li>
-          <a href="/blog/">Blog</a>
-        </li>
-        <li>
-          <a href="/blog/">Blog</a>
-        </li>
-      </ul>
+      <div className={navIsOpen ? styles.list_open : styles.list}>
+        <ul className={styles.ul}>
+          <li>
+            <a href="/">Home</a>
+          </li>
+          <li>
+            <a href="/blog/">Blog</a>
+          </li>
+          <li>
+            <a href="/blog/">Blog</a>
+          </li>
+          <li>
+            <a href="/blog/">Blog</a>
+          </li>
+          <li>
+            <a href="/blog/">Blog</a>
+          </li>
+          <li>
+            <a href="/blog/">Blog</a>
+          </li>
+          <li>
+            <a href="/blog/">Blog</a>
+          </li>
+          <li>
+            <a href="/blog/">Blog</a>
+          </li>
+          <li>
+            <a href="/blog/">Blog</a>
+          </li>
+          <li>
+            <a href="/blog/">Blog</a>
+          </li>
+          <li>
+            <a href="/blog/">Blog</a>
+          </li>
+          <li>
+            <a href="/blog/">Blog</a>
+          </li>
+          <li>
+            <a href="/blog/">Blog</a>
+          </li>
+          <li>
+            <a href="/blog/">Blog</a>
+          </li>
+          <li>
+            <a href="/blog/">Blog</a>
+          </li>
+          <li>
+            <a href="/blog/">Blog</a>
+          </li>
+          <li>
+            <a href="/blog/">Blog</a>
+          </li>
+          <li>
+            <a href="/blog/">Blog</a>
+          </li>
+          <li>
+            <a href="/blog/">Blog</a>
+          </li>
+          <li>
+            <a href="/blog/">Blog</a>
+          </li>
+          <li>
+            <a href="/blog/">Blog</a>
+          </li>
+        </ul>
+      </div>
     </>
   );
 }
