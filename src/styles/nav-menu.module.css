@@ -6,7 +6,7 @@
     position: fixed;
     inset: 0 -100% 0 100%;
     z-index: 100;
-    background: rgba(256, 256, 256, 0.9);
+    background: var(--background);
     transition: transform 0.4s;
     grid-auto-flow: revert;
     place-content: center;

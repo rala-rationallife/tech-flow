@@ -32,10 +32,11 @@ const { prev, next, prevTitle = "前へ", nextTitle = "次へ" } = Astro.props;
   }
 
   a {
+    background-color: var(--card-background);
     border-radius: calc(var(--body) * 0.5);
-    box-shadow:
+    /* box-shadow:
       0 1px 2px 0 rgba(24, 44, 84, 0.1),
-      0 1px 3px 1px #182c541a;
+      0 1px 3px 1px #182c541a; */
     padding: var(--body);
   }
 

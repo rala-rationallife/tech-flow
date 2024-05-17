@@ -47,63 +47,6 @@ export function NavMenu() {
           <li>
             <a href="/blog/">Blog</a>
           </li>
-          <li>
-            <a href="/blog/">Blog</a>
-          </li>
-          <li>
-            <a href="/blog/">Blog</a>
-          </li>
-          <li>
-            <a href="/blog/">Blog</a>
-          </li>
-          <li>
-            <a href="/blog/">Blog</a>
-          </li>
-          <li>
-            <a href="/blog/">Blog</a>
-          </li>
-          <li>
-            <a href="/blog/">Blog</a>
-          </li>
-          <li>
-            <a href="/blog/">Blog</a>
-          </li>
-          <li>
-            <a href="/blog/">Blog</a>
-          </li>
-          <li>
-            <a href="/blog/">Blog</a>
-          </li>
-          <li>
-            <a href="/blog/">Blog</a>
-          </li>
-          <li>
-            <a href="/blog/">Blog</a>
-          </li>
-          <li>
-            <a href="/blog/">Blog</a>
-          </li>
-          <li>
-            <a href="/blog/">Blog</a>
-          </li>
-          <li>
-            <a href="/blog/">Blog</a>
-          </li>
-          <li>
-            <a href="/blog/">Blog</a>
-          </li>
-          <li>
-            <a href="/blog/">Blog</a>
-          </li>
-          <li>
-            <a href="/blog/">Blog</a>
-          </li>
-          <li>
-            <a href="/blog/">Blog</a>
-          </li>
-          <li>
-            <a href="/blog/">Blog</a>
-          </li>
         </ul>
       </div>
     </>

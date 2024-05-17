@@ -44,6 +44,7 @@ const {
             url={`/blog/post/${slug}/`}
             src={image}
             title={title}
+            date={pubDateJA}
             pubDateISO={pubDateISO}
             pubDateJA={pubDateJA}
             isModified={!!modDate}
@@ -53,7 +54,7 @@ const {
     }
   </div>
 
-  {next && <Pagination prev={prev} next={next} />}
+  <Pagination prev={prev} next={next} />
 </Layout>
 
 <style is:global>
@@ -71,6 +72,10 @@ const {
 
     @media (width >= 768px) {
       grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    }
+
+    @media (width >= 1024px) {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
     }
   }
 </style>

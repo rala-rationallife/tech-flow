@@ -7,6 +7,8 @@ import { getCollection } from "astro:content";
 import { compareDesc, format, formatISO } from "date-fns";
 import { categories } from "@lib/constants";
 import "github-markdown-css/github-markdown-light.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHashtag } from "@fortawesome/free-solid-svg-icons";
 
 interface Props {
   post: CollectionEntry<"blog">;
@@ -80,24 +82,25 @@ const blogUrl = `${import.meta.env.PUBLIC_SITE_URL}/blog/post/${slug}/`;
       <h1>{title}</h1>
       <Picture src={image} alt={title} />
 
-      <div>
-        <time datetime={pubDateISO}>{pubDateJA}</time>
+      <div class="date">
+        <time datetime={pubDateISO}>公開：{pubDateJA}</time>
+        {modDate && <time datetime={modDateISO}>更新：{modDateJA}</time>}
+      </div>
 
-        <div class="categories">
-          {
-            category.map((categorySlug) => {
-              const categoryName = categories?.find(
-                (cat) => cat.categorySlug === categorySlug,
-              )?.categoryName;
-              return (
-                <a href={`/blog/category/${categorySlug}/`}>
-                  <span>#</span>
-                  <span>{categoryName}</span>
-                </a>
-              );
-            })
-          }
-        </div>
+      <div class="categories">
+        {
+          category.map((categorySlug) => {
+            const categoryName = categories?.find(
+              (cat) => cat.categorySlug === categorySlug,
+            )?.categoryName;
+            return (
+              <a href={`/blog/category/${categorySlug}/`}>
+                <span>#</span>
+                <span>{categoryName}</span>
+              </a>
+            );
+          })
+        }
       </div>
     </div>
 
@@ -107,6 +110,19 @@ const blogUrl = `${import.meta.env.PUBLIC_SITE_URL}/blog/post/${slug}/`;
 
     <Pagination {...url} />
   </article>
+
+  <aside>
+    {
+      categories.map((cat) => {
+        return (
+          <a href={`/blog/category/${cat.categorySlug}/`}>
+            <FontAwesomeIcon icon={faHashtag} />
+            <span>{cat.categoryName}</span>
+          </a>
+        );
+      })
+    }
+  </aside>
 </Layout>
 
 <style is:global>
@@ -114,7 +130,7 @@ const blogUrl = `${import.meta.env.PUBLIC_SITE_URL}/blog/post/${slug}/`;
     display: grid;
     gap: var(--body);
 
-    @media (width >= 900px) {
+    @media (width >= 1024px) {
       gap: calc(var(--body) * 2);
       grid-template-columns: repeat(12, minmax(0, 1fr));
     }
@@ -122,6 +138,7 @@ const blogUrl = `${import.meta.env.PUBLIC_SITE_URL}/blog/post/${slug}/`;
 
   body {
     .markdown-body {
+      background-color: var(--background);
       color: var(--text);
 
       h1,
@@ -179,8 +196,26 @@ const blogUrl = `${import.meta.env.PUBLIC_SITE_URL}/blog/post/${slug}/`;
     gap: calc(var(--body) * 2);
     grid-template-columns: minmax(0, auto);
 
-    @media (width >= 900px) {
-      grid-column: 1 / 9;
+    @media (width >= 1024px) {
+      grid-column: 1 / span 8;
+    }
+  }
+
+  aside {
+    display: grid;
+    gap: var(--body);
+    align-content: start;
+    font-size: var(--heading2);
+
+    @media (width >= 1024px) {
+      grid-column: 9 / span 4;
+    }
+
+    > a {
+      color: #ffffff;
+      background-color: var(--twitter);
+      padding: var(--body);
+      border-radius: var(--body);
     }
   }
 
@@ -189,10 +224,20 @@ const blogUrl = `${import.meta.env.PUBLIC_SITE_URL}/blog/post/${slug}/`;
     gap: var(--body);
   }
 
+  .date {
+    display: grid;
+  }
+
   .categories {
     display: flex;
     column-gap: var(--body);
     flex-wrap: wrap;
-    color: var(--twitter);
+    color: #ffffff;
+
+    > a {
+      padding: calc(var(--body) * 0.5) var(--body);
+      background-color: var(--twitter);
+      border-radius: var(--body);
+    }
   }
 </style>
