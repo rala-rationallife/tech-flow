@@ -18,3 +18,10 @@ const sortedBlogPosts = blogPosts.sort((a, b) =>
 >
   <SearchPost posts={sortedBlogPosts} client:load />
 </Layout>
+
+<style is:global>
+  main {
+    display: grid;
+    grid-template-columns: subgrid;
+  }
+</style>

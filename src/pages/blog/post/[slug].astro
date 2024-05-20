@@ -77,63 +77,60 @@ const blogUrl = `${import.meta.env.PUBLIC_SITE_URL}/blog/post/${slug}/`;
   publishDate={pubDateISO}
   updateDate={modDateISO}
 >
-  <article>
-    <div class="post-head">
-      <h1>{title}</h1>
-      <Picture src={image} alt={title} />
+  <div class="container">
+    <article>
+      <div class="post-head">
+        <h1>{title}</h1>
+        <Picture src={image} alt={title} />
 
-      <div class="date">
-        <time datetime={pubDateISO}>公開：{pubDateJA}</time>
-        {modDate && <time datetime={modDateISO}>更新：{modDateJA}</time>}
+        <div class="date">
+          <time datetime={pubDateISO}>公開：{pubDateJA}</time>
+          {modDate && <time datetime={modDateISO}>更新：{modDateJA}</time>}
+        </div>
+
+        <div class="categories">
+          {
+            category.map((categorySlug) => {
+              const categoryName = categories?.find(
+                (cat) => cat.categorySlug === categorySlug,
+              )?.categoryName;
+              return (
+                <a href={`/blog/category/${categorySlug}/`}>
+                  <span>#</span>
+                  <span>{categoryName}</span>
+                </a>
+              );
+            })
+          }
+        </div>
       </div>
 
-      <div class="categories">
-        {
-          category.map((categorySlug) => {
-            const categoryName = categories?.find(
-              (cat) => cat.categorySlug === categorySlug,
-            )?.categoryName;
-            return (
-              <a href={`/blog/category/${categorySlug}/`}>
-                <span>#</span>
-                <span>{categoryName}</span>
-              </a>
-            );
-          })
-        }
+      <div class="markdown-body">
+        <Content components={{ img: Picture }} />
       </div>
-    </div>
 
-    <div class="markdown-body">
-      <Content components={{ img: Picture }} />
-    </div>
+      <Pagination {...url} />
+    </article>
 
-    <Pagination {...url} />
-  </article>
-
-  <aside>
-    {
-      categories.map((cat) => {
-        return (
-          <a href={`/blog/category/${cat.categorySlug}/`}>
-            <FontAwesomeIcon icon={faHashtag} />
-            <span>{cat.categoryName}</span>
-          </a>
-        );
-      })
-    }
-  </aside>
+    <aside>
+      {
+        categories.map((cat) => {
+          return (
+            <a href={`/blog/category/${cat.categorySlug}/`}>
+              <FontAwesomeIcon icon={faHashtag} />
+              <span>{cat.categoryName}</span>
+            </a>
+          );
+        })
+      }
+    </aside>
+  </div>
 </Layout>
 
 <style is:global>
   main {
     display: grid;
-    gap: var(--body);
-
-    @media (width >= 1024px) {
-      gap: calc(var(--body) * 2);
-      grid-template-columns: repeat(12, minmax(0, 1fr));
-    }
+    grid-template-columns: subgrid;
   }
 
   body {
@@ -191,6 +188,17 @@ const blogUrl = `${import.meta.env.PUBLIC_SITE_URL}/blog/post/${slug}/`;
 </style>
 
 <style>
+  .container {
+    grid-column: 2 / -2;
+    display: grid;
+    gap: var(--body);
+
+    @media (width >= 1024px) {
+      gap: calc(var(--body) * 2);
+      grid-template-columns: repeat(12, minmax(0, 1fr));
+    }
+  }
+
   article {
     display: grid;
     gap: calc(var(--body) * 2);

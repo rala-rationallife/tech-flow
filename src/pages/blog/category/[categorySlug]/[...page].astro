@@ -42,48 +42,56 @@ const {
   pageTitle={`${categoryName}に関する記事`}
   description={`${categoryName}の記事一覧`}
 >
-  <h1>{categoryName}</h1>
+  <div class="container">
+    <h1>{categoryName}</h1>
 
-  <div class="grid">
-    {
-      data.map((post) => {
-        const {
-          slug,
-          data: { title, pubDate, modDate },
-        } = post;
+    <div class="grid">
+      {
+        data.map((post) => {
+          const {
+            slug,
+            data: { title, pubDate, modDate },
+          } = post;
 
-        const pubDateISO = modDate ? formatISO(modDate) : formatISO(pubDate);
-        const pubDateJA = modDate
-          ? format(modDate, "yyyy年MM月dd日")
-          : format(pubDate, "yyyy年MM月dd日");
+          const pubDateISO = modDate ? formatISO(modDate) : formatISO(pubDate);
+          const pubDateJA = modDate
+            ? format(modDate, "yyyy年MM月dd日")
+            : format(pubDate, "yyyy年MM月dd日");
 
-        return (
-          <Card
-            url={`/blog/post/${slug}/`}
-            title={title}
-            dateTime={pubDateISO}
-            date={pubDateJA}
-            isModified={!!modDate}
-          />
-        );
-      })
-    }
+          return (
+            <Card
+              url={`/blog/post/${slug}/`}
+              title={title}
+              dateTime={pubDateISO}
+              date={pubDateJA}
+              isModified={!!modDate}
+            />
+          );
+        })
+      }
+    </div>
+
+    <Pagination prev={prev} next={next} />
   </div>
-
-  <Pagination prev={prev} next={next} />
 </Layout>
 
 <style is:global>
   main {
     display: grid;
-    gap: calc(var(--body) * 2);
-    align-content: start;
+    grid-template-columns: subgrid;
   }
 </style>
 
 <style>
+  .container {
+    grid-column: 2 / -2;
+    display: grid;
+    gap: calc(var(--body) * 2);
+    align-content: start;
+  }
+
   h1 {
-    text-align: center;
+    justify-self: center;
   }
 
   .grid {

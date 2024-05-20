@@ -3,13 +3,22 @@ import Layout from "@layouts/layout.astro";
 ---
 
 <Layout>
-  <h1>Tech Flow.</h1>
+  <div class="container">
+    <h1>Tech Flow.</h1>
+  </div>
 </Layout>
 
 <style is:global>
   main {
     display: grid;
-    justify-content: center;
-    align-items: center;
+    grid-template-columns: subgrid;
+  }
+</style>
+
+<style>
+  .container {
+    grid-column: 2 / -2;
+    display: grid;
+    place-content: center;
   }
 </style>

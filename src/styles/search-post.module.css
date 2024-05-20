@@ -1,6 +1,8 @@
 .searchPost {
+  grid-column: 2 / -2;
   display: grid;
   gap: var(--body);
+  align-content: start;
 }
 
 .searchForm {
