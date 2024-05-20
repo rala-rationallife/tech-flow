@@ -4,7 +4,7 @@ import { compareDesc, format, formatISO } from "date-fns";
 import type { GetStaticPathsOptions } from "astro";
 import { categories } from "@lib/constants";
 import Layout from "@layouts/layout.astro";
-import Card from "@components/card.astro";
+import { Card } from "@components/card";
 import Pagination from "@components/pagination.astro";
 
 export async function getStaticPaths({ paginate }: GetStaticPathsOptions) {
@@ -38,7 +38,10 @@ const {
 } = Astro.props;
 ---
 
-<Layout pageTitle={categoryName} description={`${categoryName}の記事一覧`}>
+<Layout
+  pageTitle={`${categoryName}に関する記事`}
+  description={`${categoryName}の記事一覧`}
+>
   <h1>{categoryName}</h1>
 
   <div class="grid">
@@ -46,7 +49,7 @@ const {
       data.map((post) => {
         const {
           slug,
-          data: { image, title, pubDate, modDate },
+          data: { title, pubDate, modDate },
         } = post;
 
         const pubDateISO = modDate ? formatISO(modDate) : formatISO(pubDate);
@@ -57,11 +60,9 @@ const {
         return (
           <Card
             url={`/blog/post/${slug}/`}
-            src={image}
             title={title}
+            dateTime={pubDateISO}
             date={pubDateJA}
-            pubDateISO={pubDateISO}
-            pubDateJA={pubDateJA}
             isModified={!!modDate}
           />
         );

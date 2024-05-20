@@ -1,0 +1,12 @@
+.input {
+  padding: var(--body);
+  border: solid 1px #dddddd;
+  font-size: var(--body);
+  color: var(--text);
+  background-color: var(--background);
+
+  &[type="search"]::-webkit-search-cancel-button {
+    padding: calc(var(--body) / 2);
+    cursor: pointer;
+  }
+}

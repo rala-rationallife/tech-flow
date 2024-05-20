@@ -1,0 +1,44 @@
+.searchPost {
+  display: grid;
+  gap: var(--body);
+}
+
+.searchForm {
+  display: grid;
+  gap: var(--body);
+  max-width: 666px;
+  justify-self: center;
+  width: 100%;
+}
+
+.search02 {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: calc(var(--body) / 2);
+  align-items: center;
+
+  > svg {
+    grid-column: 1;
+    grid-row: 1;
+    width: calc(var(--body) * 3);
+  }
+
+  > input {
+    grid-column: 1 / -1;
+    grid-row: 1;
+    padding-inline: calc(var(--body) * 3) calc(var(--body) / 2);
+  }
+}
+
+.postList {
+  display: grid;
+  gap: calc(var(--body) * 2);
+
+  @media (width >= 768px) {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  }
+
+  @media (width >= 1024px) {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}

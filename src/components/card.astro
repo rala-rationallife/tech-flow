@@ -1,13 +1,14 @@
 ---
 import type { ImageMetadata } from "astro";
 
-const { url, title, date } = Astro.props;
+const { url, title, dateTime, date } = Astro.props;
 
 interface Props {
   url: string;
   src: ImageMetadata;
   alt?: string;
   title: string;
+  dateTime: string;
   date: string;
   pubDateISO?: string;
   pubDateJA?: string;
@@ -18,7 +19,7 @@ interface Props {
 <article>
   <a href={url}>
     <h2>{title}</h2>
-    <p>{date}</p>
+    <time datetime={dateTime}>{date}</time>
   </a>
 </article>
 
@@ -41,7 +42,7 @@ interface Props {
     grid-area: title;
   }
 
-  p {
+  time {
     grid-area: date;
     justify-self: end;
   }

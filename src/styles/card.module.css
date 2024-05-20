@@ -1,0 +1,22 @@
+.link {
+  display: grid;
+  grid-template:
+    ". . . ." calc(var(--body) * 0.5)
+    ". title title ." 1fr
+    ". . date ." auto
+    ". . . ." calc(var(--body) * 0.5)
+    / var(--body) 1fr auto var(--body);
+  aspect-ratio: 16 / 9;
+  background-color: var(--card-background);
+  border-radius: var(--body);
+  overflow: hidden;
+}
+
+.title {
+  grid-area: title;
+}
+
+.date {
+  grid-area: date;
+  justify-self: end;
+}

@@ -1,6 +1,12 @@
 import * as React from "react";
 import styles from "@styles/nav-menu.module.css";
-import { faBars, faXmark } from "@fortawesome/free-solid-svg-icons";
+import {
+  faBars,
+  faBookOpen,
+  faHome,
+  faSearch,
+  faXmark,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Global, css } from "@emotion/react";
 
@@ -42,10 +48,22 @@ export function NavMenu() {
       <div className={navIsOpen ? styles.list_open : styles.list}>
         <ul className={styles.ul}>
           <li>
-            <a href="/">Home</a>
+            <a href="/" className={styles.menuItem}>
+              <FontAwesomeIcon icon={faHome} />
+              <span>ホーム</span>
+            </a>
           </li>
           <li>
-            <a href="/blog/">Blog</a>
+            <a href="/blog/" className={styles.menuItem}>
+              <FontAwesomeIcon icon={faBookOpen} />
+              <span>ブログ</span>
+            </a>
+          </li>
+          <li>
+            <a href="/search/" className={styles.menuItem}>
+              <FontAwesomeIcon icon={faSearch} />
+              <span>検索する</span>
+            </a>
           </li>
         </ul>
       </div>

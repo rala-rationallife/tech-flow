@@ -1,6 +1,6 @@
 ---
 import Layout from "@layouts/layout.astro";
-import Card from "@components/card.astro";
+import { Card } from "@components/card";
 
 import { getCollection } from "astro:content";
 import { compareDesc, format, formatISO } from "date-fns";
@@ -31,7 +31,7 @@ const {
       data.map((post) => {
         const {
           slug,
-          data: { image, title, pubDate, modDate },
+          data: { title, pubDate, modDate },
         } = post;
 
         const pubDateISO = modDate ? formatISO(modDate) : formatISO(pubDate);
@@ -42,11 +42,9 @@ const {
         return (
           <Card
             url={`/blog/post/${slug}/`}
-            src={image}
             title={title}
+            dateTime={pubDateISO}
             date={pubDateJA}
-            pubDateISO={pubDateISO}
-            pubDateJA={pubDateJA}
             isModified={!!modDate}
           />
         );
