@@ -1,0 +1,106 @@
+---
+import { Input } from "@components/input";
+import Layout from "@layouts/layout.astro";
+---
+
+<Layout
+  pageTitle="お問い合わせ"
+  description="RalaCodeへのお問い合わせはこちらからどうぞ"
+>
+  <form>
+    <h1>お問い合わせ</h1>
+    <div class="field">
+      <label for="name">お名前</label>
+      <Input
+        type="text"
+        id="name"
+        placeholder="お名前をご入力ください"
+        required
+        autoComplete="name"
+      />
+    </div>
+    <div class="field">
+      <label for="email">メールアドレス</label>
+      <Input
+        type="email"
+        id="email"
+        placeholder="メールアドレスをご入力ください"
+        required
+        autoComplete="email"
+      />
+    </div>
+    <div class="field">
+      <label for="content">お問い合わせ内容</label>
+      <textarea
+        id="content"
+        rows="10"
+        placeholder="お問い合わせ内容をご入力ください"
+        required></textarea>
+    </div>
+    <button type="submit">送信する</button>
+  </form>
+</Layout>
+
+<style is:global>
+  main {
+    display: grid;
+    grid-template-columns: subgrid;
+  }
+</style>
+
+<style>
+  form {
+    grid-column: 2 / -2;
+    display: grid;
+    grid-template-columns: max-content minmax(auto, 500px);
+    column-gap: calc(var(--body) * 2);
+    row-gap: calc(var(--body) * 1.5);
+    justify-content: center;
+    align-content: start;
+
+    > * {
+      grid-column: span 2;
+    }
+  }
+
+  h1 {
+    justify-self: center;
+  }
+
+  .field {
+    display: grid;
+    grid-template-columns: subgrid;
+    align-items: center;
+
+    @media (width <= 767px) {
+      grid-template-columns: revert;
+      row-gap: calc(var(--body) / 2);
+    }
+
+    > textarea {
+      border: solid 1px #dddddd;
+      color: var(--text);
+      background-color: var(--background);
+      resize: none;
+      font-size: var(--body);
+      padding: var(--body);
+      font-weight: normal;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica,
+        Arial, sans-serif;
+    }
+  }
+
+  button {
+    background-color: var(--twitter);
+    border: none;
+    color: #ffffff;
+    font-size: var(--body);
+    padding: calc(var(--body) / 2);
+    border-radius: var(--body);
+    cursor: pointer;
+
+    &:hover {
+      opacity: 0.7;
+    }
+  }
+</style>

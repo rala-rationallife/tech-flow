@@ -3,6 +3,7 @@ import styles from "@styles/nav-menu.module.css";
 import {
   faBars,
   faBookOpen,
+  faEnvelope,
   faHome,
   faSearch,
   faXmark,
@@ -63,6 +64,12 @@ export function NavMenu() {
             <a href="/search/" className={styles.menuItem}>
               <FontAwesomeIcon icon={faSearch} />
               <span>検索する</span>
+            </a>
+          </li>
+          <li>
+            <a href="/contact/" className={styles.menuItem}>
+              <FontAwesomeIcon icon={faEnvelope} />
+              <span>お問い合わせ</span>
             </a>
           </li>
         </ul>

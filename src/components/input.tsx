@@ -4,11 +4,20 @@ import styles from "@styles/input.module.css";
 interface Props {
   type: string;
   id: string;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   placeholder: string;
+  required?: boolean;
+  autoComplete?: string;
 }
 
-export function Input({ type, id, onChange, placeholder }: Props) {
+export function Input({
+  type,
+  id,
+  onChange,
+  placeholder,
+  required,
+  autoComplete,
+}: Props) {
   return (
     <input
       type={type}
@@ -16,6 +25,8 @@ export function Input({ type, id, onChange, placeholder }: Props) {
       onChange={onChange}
       placeholder={placeholder}
       className={styles.input}
+      required={required}
+      autoComplete={autoComplete}
     />
   );
 }

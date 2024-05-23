@@ -45,7 +45,7 @@
 .ul {
   display: grid;
   grid-auto-flow: column;
-  gap: calc(var(--body) * 2);
+  gap: calc(var(--body) * 3);
 
   @media (width <= 767px) {
     grid-auto-flow: revert;
