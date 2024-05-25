@@ -1,0 +1,5 @@
+.list {
+  display: flex;
+  gap: calc(var(--body) * 0.5);
+  align-items: center;
+}

@@ -12,4 +12,5 @@ export const siteMeta = {
 export const categories = [
   { categoryName: "Python", categorySlug: "python" },
   { categoryName: "JavaScript", categorySlug: "javascript" },
+  { categoryName: "React", categorySlug: "react" },
 ];

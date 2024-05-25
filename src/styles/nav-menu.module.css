@@ -45,17 +45,19 @@
 .ul {
   display: grid;
   grid-auto-flow: column;
-  gap: calc(var(--body) * 3);
+  gap: var(--body);
 
   @media (width <= 767px) {
     grid-auto-flow: revert;
     overflow-y: auto;
+    gap: calc(var(--body) * 2);
   }
 }
 
 .menuItem {
   display: grid;
   justify-items: center;
+  min-width: 82px;
 
   span {
     font-size: calc(var(--body) * 0.75);
