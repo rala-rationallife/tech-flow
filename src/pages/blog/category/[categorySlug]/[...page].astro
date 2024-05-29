@@ -1,11 +1,11 @@
 ---
+import Layout from "@layouts/layout.astro";
+import { categories } from "@lib/constants";
+import { Card } from "@components/card";
+import Pagination from "@components/pagination.astro";
 import { getCollection } from "astro:content";
 import { compareDesc, format, formatISO } from "date-fns";
 import type { GetStaticPathsOptions } from "astro";
-import { categories } from "@lib/constants";
-import Layout from "@layouts/layout.astro";
-import { Card } from "@components/card";
-import Pagination from "@components/pagination.astro";
 
 export async function getStaticPaths({ paginate }: GetStaticPathsOptions) {
   const blogPosts = await getCollection("blog", ({ data }) => {
