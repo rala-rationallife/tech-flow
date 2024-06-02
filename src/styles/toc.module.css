@@ -1,5 +1,5 @@
 .close {
-  border: solid 1px var(--main-color);
+  border: solid 1px var(--border-color);
 
   .text {
     animation: closeAnim 0.5s forwards;
@@ -72,10 +72,12 @@
 }
 
 .list {
+  display: grid;
+  gap: var(--body);
   list-style: none;
   margin: 0 !important;
   padding: 0 var(--body) var(--body) !important;
-  border: none;
+  border: none !important;
   background-color: revert;
   overflow: hidden;
   transition: height 0.5s;

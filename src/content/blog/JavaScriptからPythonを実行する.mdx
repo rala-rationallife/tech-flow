@@ -2,6 +2,7 @@
 title: JavaScriptからPythonを実行する
 slug: js-execute-python
 pubDate: "2023-01-22"
+modDate: "2024-06-01"
 image: "../../assets/python.jpg"
 pageImg: /assets/python.jpg
 category:
@@ -25,14 +26,14 @@ const options = { scriptPath: '/path/to/python/scripts/' };
 const pyshell = new PythonShell('my_python_script.py', options); // Pythonスクリプトへの入力を設定
 pyshell.send('Hello World!'); // データ受信時の処理
 pyshell.on('message', function (message) {
-	// 受信したデータを処理
-	console.log(message);
+  // 受信したデータを処理
+  console.log(message);
 }); // 終了時の処理
 pyshell.end(function (err) {
-	if (err) {
-		throw err;
-	}
-	console.log('finished');
+  if (err) {
+    throw err;
+  }
+  console.log('finished');
 });
 ```
 

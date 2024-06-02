@@ -4,6 +4,7 @@
   --main-color: #6297b1;
   --sub-color: #4d7a8e;
   --twitter: #1da1f2;
+  --border-color: var(--main-color);
 
   --background: #ffffff;
   --card-background: #f7f7f7;
@@ -20,6 +21,7 @@
     --background: #000000;
     --card-background: #222222;
     --twitter: #222222;
+    --border-color: #ffffff;
   }
 }
 

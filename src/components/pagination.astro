@@ -1,4 +1,10 @@
 ---
+import {
+  faChevronLeft,
+  faChevronRight,
+} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 interface Props {
   prev?: string;
   next?: string;
@@ -10,11 +16,23 @@ const { prev, next, prevTitle = "前へ", nextTitle = "次へ" } = Astro.props;
 ---
 
 <div>
-  {prev ? <a href={prev}>← {prevTitle}</a> : ""}
+  {
+    prev ? (
+      <a href={prev}>
+        <>
+          <FontAwesomeIcon icon={faChevronLeft} />
+          <span>{prevTitle}</span>
+        </>
+      </a>
+    ) : (
+      ""
+    )
+  }
   {
     next ? (
       <a href={next} class="next">
-        {nextTitle} →
+        <span>{nextTitle}</span>
+        <FontAwesomeIcon icon={faChevronRight} />
       </a>
     ) : (
       ""
@@ -32,15 +50,21 @@ const { prev, next, prevTitle = "前へ", nextTitle = "次へ" } = Astro.props;
   }
 
   a {
+    display: grid;
+    grid-auto-flow: column;
+    gap: var(--body);
+    justify-content: start;
+    align-items: center;
     background-color: var(--card-background);
     border-radius: calc(var(--body) * 0.5);
-    /* box-shadow:
-      0 1px 2px 0 rgba(24, 44, 84, 0.1),
-      0 1px 3px 1px #182c541a; */
     padding: var(--body);
+
+    &:hover {
+      opacity: 0.7;
+    }
   }
 
   .next {
-    text-align: right;
+    justify-content: end;
   }
 </style>

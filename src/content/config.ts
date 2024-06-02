@@ -1,4 +1,4 @@
-import { z, defineCollection } from "astro:content";
+import { z, defineCollection, reference } from "astro:content";
 import { toZonedTime } from "date-fns-tz";
 
 // const ZodImageMetadata = z.object({
@@ -10,6 +10,7 @@ import { toZonedTime } from "date-fns-tz";
 // });
 
 const blogCollection = defineCollection({
+  type: "content",
   schema: ({ image }) =>
     z.object({
       isDraft: z.boolean().optional(),
@@ -27,6 +28,7 @@ const blogCollection = defineCollection({
       pageImg: z.string(),
       category: z.array(z.string()),
       description: z.string(),
+      relatedPosts: z.array(reference("blog")).optional(),
     }),
 });
 
