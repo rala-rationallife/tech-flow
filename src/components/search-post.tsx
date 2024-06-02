@@ -27,37 +27,44 @@ interface IState {
     };
   }[];
   query: string;
+  searchTerms: string[];
 }
 
 export function SearchPost({ posts }: Props) {
   const [state, setState] = React.useState<IState>({
     filteredData: [],
     query: "",
+    searchTerms: [],
   });
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const query = e.target.value;
+    const query = e.target.value.trim();
+    const searchTerms = query.split(/\s+/);
 
     const filteredData = posts.filter((post) => {
       const {
         data: { title },
       } = post;
 
-      return title.toLowerCase().includes(query.toLowerCase());
+      return searchTerms.every((term) =>
+        title.toLowerCase().includes(term.toLowerCase()),
+      );
     });
     setState({
       filteredData,
       query,
+      searchTerms,
     });
   };
 
-  const { filteredData, query } = state;
+  const { filteredData, query, searchTerms } = state;
   const hasSearchResults = filteredData && query !== "";
   const result = hasSearchResults ? filteredData : null;
 
   return (
     <div className={styles.searchPost}>
       <div className={styles.searchForm}>
+        <p>スペースで区切るとAND検索できます。</p>
         <form className={styles.search02}>
           <label htmlFor="search" className="sr-only">
             検索
@@ -71,7 +78,7 @@ export function SearchPost({ posts }: Props) {
           <FontAwesomeIcon icon={faSearch} />
         </form>
         {query !== "" && (
-          <p>{`「${query}」 の検索結果: ${result?.length} 件`}</p>
+          <p>{`${searchTerms.join(" ")} の検索結果: ${result?.length} 件`}</p>
         )}
       </div>
       {result && (

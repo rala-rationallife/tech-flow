@@ -1,19 +1,23 @@
 ---
 import { SearchPost } from "@components/search-post";
 import Layout from "@layouts/layout.astro";
+import { siteMeta } from "@lib/constants";
 import { getCollection } from "astro:content";
 import { compareDesc } from "date-fns";
 
 const blogPosts = await getCollection("blog", ({ data }) => {
   return data.isDraft !== true;
 });
+
 const sortedBlogPosts = blogPosts.sort((a, b) =>
   compareDesc(a.data.pubDate, b.data.pubDate),
 );
+
+const { siteTitle } = siteMeta;
 ---
 
 <Layout
-  pageTitle="RalaCodeの記事を探す"
+  pageTitle={`${siteTitle}の記事を探す`}
   description="検索で記事を瞬時に探せます"
 >
   <SearchPost posts={sortedBlogPosts} client:load />
