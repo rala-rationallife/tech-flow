@@ -1,0 +1,220 @@
+---
+title: GatsbyJSの開発環境を構築する手順
+slug: build-gatsbyjs-environment
+pubDate: "2021-06-16"
+modDate: "2022-06-18"
+image: "../../assets/build-gatsbyjs-environment/eyecatch-image.png"
+pageImg: /assets/build-gatsbyjs-environment/eyecatch-image.png
+category:
+- gatsby
+description: GatsbyJSの開発環境を構築する手順を解説します。具体的にはNode.jsのインストール、yarnのインストール、Gatsby CLIのインストールの流れで解説します。
+---
+
+import { RelatedPost } from "../../components/related-post.tsx";
+import * as nvmWindows from "./install-nodejs-on-windows.mdx";
+import * as nvm from "./install-nodejs-with-nvm.mdx";
+
+export const heading100 = "Node.jsをインストールする";
+export const heading200 = "Gatsby CLIをインストールする";
+export const heading300 = "サンプルサイトを作ってみる";
+export const heading400 = "まとめ";
+
+「GatsbyJSで開発してみたいので、環境構築したい」
+
+こういった要望にお答えします。
+
+本記事の内容は以下です。
+
+- [{heading100}](#heading100)
+- [{heading200}](#heading200)
+- [{heading300}](#heading300)
+
+この記事を書いている僕は、フロントエンドを中心に開発・発信を行っております。また、GatsbyJSを使ったブログ運営の経験もあります。
+
+## {heading100}
+
+GatsbyJSを使うには、まずNode.jsをインストールしないといけません。以下の記事を参考にNode.jsをインストールしてください。
+
+<RelatedPost slug={nvmWindows.frontmatter.slug} title={nvmWindows.frontmatter.title} />
+
+<RelatedPost slug={nvm.frontmatter.slug} title={nvm.frontmatter.title} />
+
+## {heading200}
+
+GatsbyJSでサイトを作るには、「**Gatsby CLI**」をインストールする必要があります。「CLI」は「**コマンドラインインターフェース**」の略です。
+
+Windowsなら「**コマンドプロンプト**」、Macなら「**ターミナル**」を開いてください。
+
+そして、以下のコマンドを入力して実行します。
+
+<div class="code-title">ターミナル</div>
+
+```bash
+npm install -g gatsby-cli
+```
+
+これで、Gatsby CLIがインストールされます。
+
+Gatsby CLIは新しいものがどんどんリリースされています。上記のコマンドは定期的に実行することで、新しいGatsby CLIが上書きでインストールされます。
+
+では、Gatsby CLIが本当にインストールされたか確認します。以下のコマンドを入力して実行してください。
+
+<div class="code-title">ターミナル</div>
+
+```bash
+gatsby -v
+```
+
+以下のように表示されたら、Gatsby CLIが正しくインストールされています。
+
+<div class="code-title">ターミナル</div>
+
+```bash
+Gatsby CLI version: （数字）
+```
+
+これで、GatsbyJSでサイトを作る準備が整いました。
+
+## {heading300}
+
+では、簡単なサイトをGatsbyJSで作ってみましょう。
+
+作成場所をわかりやすくするため、「**デスクトップ**」フォルダに移動します。ターミナルで、以下のコマンドを入力して実行してください。
+
+<div class="code-title">ターミナル</div>
+
+```bash
+cd desktop
+```
+
+これで「デスクトップ」フォルダに移動できました。
+
+Webサイトを作る際、ゼロから作るのはやはり面倒だと思います。GatsbyJSでは、サイトを作るときに便利な「**スターター**」というものが用意されています。
+
+「スターター」には色々あって、プラグインや画像があらかじめ準備されたものだったり、ある程度サイトの形が決まったものとかがあります。
+
+ここでは、最もシンプルでまっさらなスターターである「**gatsby-starter-hello-world**」を使ってサンプルサイトを作ります。
+
+形としては、以下のようなコマンドを入力していきます。これは例なので、入力しないでください。
+
+<div class="code-title">ターミナル</div>
+
+```bash
+gatsby new (フォルダの名前) (スターターのurl)
+```
+
+GatsbyJSでサイトを作ると、一つのフォルダが出来上がります。「**プロジェクトフォルダ**」といいます。プロジェクトフォルダの名前をターミナル上で決めるわけです。
+
+そのプロジェクトフォルダの中には、色々なファイルが自動で作られます。
+
+では、実際に作ってみましょう。以下のコマンドを入力して実行してください。
+
+<div class="code-title">ターミナル</div>
+
+```bash
+gatsby new sample-site https://github.com/gatsbyjs/gatsby-starter-hello-world
+```
+
+今回はプロジェクトフォルダの名前を「**sample-site**」としました。スターターは「gatsby-starter-hello-world」を使うためのurlを指定しています。
+
+サイトの構築が終わったら、以下のコマンドを入力して実行してください。プロジェクトフォルダの中に移動します。
+
+<div class="code-title">ターミナル</div>
+
+```bash
+cd sample-site
+```
+
+次に、Gatsbyの**開発サーバー**を起動します。開発サーバーを起動することで、テスト環境でサイトの表示を確認できます。
+
+以下のコマンドを入力して実行してください。
+
+<div class="code-title">ターミナル</div>
+
+```bash
+gatsby develop
+```
+
+文字がたくさん表示されて、開発サーバーが起動します。最後の部分が以下のように表示されたら、正常に開発サーバーが起動しています。
+
+<div class="code-title">ターミナル</div>
+
+```bash
+You can now view gatsby-starter-hello-world in the browser.
+
+	http://localhost:8000/
+⠀
+View GraphiQL, an in-browser IDE, to explore your site's data and
+	schema
+⠀
+	http://localhost:8000/___graphql
+
+Note that the development build is not optimized.
+To create a production build, use gatsby build
+
+success Building development bundle - 11.077s
+```
+
+では、Google Chromeなどのブラウザで「<a href="http://localhost:8000/" target="_blank">http://localhost:8000/</a>」にアクセスしてみてください。
+
+左上に「Hello world!」とだけ書かれたページが開いたと思います。ちょっとシンプル過ぎますが、これがGatsbyJSで作られたサイトです。
+
+開発サーバーを終了させるときは、以下のです。
+
+- Windowsの場合は「Ctrl + c」
+- Macの場合は「control + c」
+
+パソコンをスリープさせるときなんかは、開発サーバーを終了させておいた方がいいと思います。
+
+「このサイトじゃちょっとシンプル過ぎる...」
+
+と思われる方は、別のスターターも試してみましょう。一度、開発サーバーを終了させてください。
+
+以下のコマンドを入力して実行してください。「デスクトップ」に移動します。
+
+<div class="code-title">ターミナル</div>
+
+```bash
+cd ..
+```
+
+次は以下のコマンドを実行して、もう一つサイトを作ってみましょう。
+
+<div class="code-title">ターミナル</div>
+
+```bash
+gatsby new gatsby-default-site
+```
+
+今回はスターターを指定していません。プロジェクトフォルダの名前は「**gatsby-default-site**」としました。
+
+スターターを指定しない場合、「**gatsby-starter-default**」というスターターが自動で適用されます。
+
+サイトの構築が終わったら、また以下のコマンドでプロジェクトフォルダに移動します。
+
+<div class="code-title">ターミナル</div>
+
+```bash
+cd gatsby-default-site
+```
+
+そして、開発サーバーを起動させます。
+
+<div class="code-title">ターミナル</div>
+
+```bash
+gatsby develop
+```
+
+ブラウザで「<a href="http://localhost:8000/" target="_blank">http://localhost:8000/</a>」にアクセスします。
+
+今度はWebサイトっぽいものが表示されたと思います。「最終的にどのようなサイトを作るか」によってスターターを使い分けることができます。
+
+## {heading400}
+
+GatsbyJSの開発環境を構築する手順を、もう一度以下にまとめます。
+
+- Node.jsのインストール
+- Gatsby CLIのインストール
+
+これで、GatsbyJSでサイトを作ることができるようになります。

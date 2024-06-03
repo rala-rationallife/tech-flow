@@ -1,0 +1,9 @@
+.article {
+  > a {
+    display: grid;
+    grid-auto-flow: column;
+    gap: var(--body);
+    align-items: center;
+    background-color: var(--card-background);
+  }
+}
