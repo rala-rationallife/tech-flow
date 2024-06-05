@@ -14,4 +14,5 @@ export const categories = [
   { categoryName: "JavaScript", categorySlug: "javascript" },
   { categoryName: "React", categorySlug: "react" },
   { categoryName: "Gatsby", categorySlug: "gatsby" },
+  { categoryName: "WordPress", categorySlug: "wordpress" },
 ];
