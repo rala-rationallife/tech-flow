@@ -12,6 +12,9 @@ description: 「お名前.comで取得した独自ドメインをNetlifyのカ�
 import { Picture } from "astro:assets";
 import { Toc } from "../../components/toc.tsx";
 import { TocItem } from "../../components/toc-item.tsx";
+import { RelatedPost } from "../../components/related-post.tsx"
+
+import * as jsExecutePython from "./JavaScriptからPythonを実行する.mdx"
 
 export const heading100 = "お名前.comで独自ドメインを取得する";
 export const heading200 = "Netlifyで設定を行う";
@@ -22,6 +25,8 @@ export const heading500 = "まとめ";
 「お名前.comで取得した独自ドメインをNetlifyのカスタムドメインとして使いたい」
 
 という要望にお答えします。
+
+<RelatedPost slug={jsExecutePython.frontmatter.slug} title={jsExecutePython.frontmatter.title} />
 
 この記事を書いている僕は、実際にお名前.comで取得した独自ドメインをNetlifyのカスタムドメインとして適用したサイトを運営しています。具体的には「<a href="https://ralafy.com" target="_blank" rel="nofollow noopener">Ralafy</a>」というサイトです。
 
@@ -192,3 +197,6 @@ Netlifyにお名前.comで取得した独自ドメインを適用する方法を
 - 独自ドメインが適用されたか確認する
 
 というわけで、記事は以上です。
+import type { RelatedPost } from "@components/related-post"
+import type { RelatedPost } from "@components/related-post"
+

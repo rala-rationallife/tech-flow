@@ -3,7 +3,11 @@
     display: grid;
     grid-auto-flow: column;
     gap: var(--body);
+    justify-content: space-between;
     align-items: center;
     background-color: var(--card-background);
+    font-size: var(--body);
+    padding: var(--body);
+    border-radius: var(--body);
   }
 }
