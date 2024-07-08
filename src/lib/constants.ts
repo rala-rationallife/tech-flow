@@ -15,4 +15,5 @@ export const categories = [
   { categoryName: "React", categorySlug: "react" },
   { categoryName: "Gatsby", categorySlug: "gatsby" },
   { categoryName: "WordPress", categorySlug: "wordpress" },
+  { categoryName: "Git, GitHub", categorySlug: "git-github" },
 ];

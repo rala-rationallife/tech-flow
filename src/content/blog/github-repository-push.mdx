@@ -1,0 +1,395 @@
+---
+isDraft: true
+title: 【GitHub】リポジトリにファイルをpushする方法【コマンドライン使います】
+slug: github-repository-push
+pubDate: "2021-08-21"
+modDate: "2023-08-12"
+image: "../../assets/github-repository-push/eyecatch.png"
+pageImg: /assets/github-repository-push/eyecatch.png
+category:
+- git-github
+description: この記事ではコマンドラインを使ってGitHubのリモートリポジトリにファイルを追加する方法を解説します。GitHub初心者向けの内容となっており、Gitの使い方も含めながら解説していきます。
+---
+
+import { Picture } from "astro:assets";
+import { Toc } from "../../components/toc.tsx";
+import { TocItem } from "../../components/toc-item.tsx";
+import { TocChildItem } from "../../components/toc-child-item.tsx";
+import * as nodejsReactTypescript from "./create-nodejs-react-app-with-typescript.mdx";
+import * as createGithubRepository from "./create-github-repository.mdx";
+import * as gitInitialSetting from "./git-initial-setting.mdx";
+import * as installGitOnWindows from "./install-git-on-windows.mdx";
+
+export const heading10 = "GitHubでリモートリポジトリを作る";
+export const heading20 = "Gitを使える状態にする";
+export const heading30 = "コマンドラインを使う";
+export const heading31 = "サンプルのファイルを用意する";
+export const heading40 = "リモートリポジトリにファイルをpushする";
+export const heading40_1 = "ローカルリポジトリを作る";
+export const heading40_2 = "ローカルリポジトリにファイルを追加する";
+export const heading40_3 = "ローカルリポジトリとリモートリポジトリをつなぐ";
+export const heading40_4 = "リモートリポジトリにファイルを追加（push）する";
+export const heading50 = "ファイルの内容を変更してまたpushする";
+export const heading50_1 = "ファイルの内容を修正する";
+export const heading50_2 = "リモートリポジトリにまたpushする";
+export const heading50_3 = "リモートリポジトリに反映されたか確認";
+export const heading60 = "まとめ";
+
+この記事では、コマンドラインを使ってGitHubのリモートリポジトリにファイルを追加する方法を解説します。GitHubに加えてGitの基本的な操作も含んでおり、初心者向けの内容となっております。
+
+この記事を書いている僕は、フロントエンドを中心に開発・発信を行っております。
+
+<div class="related-post">
+  <a rel="prefetch" href={`/blog/post/${nodejsReactTypescript.frontmatter.slug}/`}><figure><CustomPicture src={`/assets/${nodejsReactTypescript.frontmatter.slug}/eyecatch.png`} alt={nodejsReactTypescript.frontmatter.title} /></figure><h2>{nodejsReactTypescript.frontmatter.title}</h2><div class="read">記事を読む</div></a>
+</div>
+
+<Toc client:load>
+	<TocItem>[{heading10}](#heading10)</TocItem>
+	<TocItem>[{heading20}](#heading20)</TocItem>
+	<TocItem>[{heading30}](#heading30)</TocItem>
+	<TocItem>[{heading31}](#heading31)</TocItem>
+	<TocItem>[{heading40}](#heading40)</TocItem>
+	<ul>
+		<TocChildItem>[{heading40_1}](#heading40_1)</TocChildItem>
+		<TocChildItem>[{heading40_2}](#heading40_2)</TocChildItem>
+		<TocChildItem>[{heading40_3}](#heading40_3)</TocChildItem>
+		<TocChildItem>[{heading40_4}](#heading40_4)</TocChildItem>
+	</ul>
+	<TocItem>[{heading50}](#heading50)</TocItem>
+	<ul>
+		<TocChildItem>[{heading50_1}](#heading50_1)</TocChildItem>
+		<TocChildItem>[{heading50_2}](#heading50_2)</TocChildItem>
+		<TocChildItem>[{heading50_3}](#heading50_3)</TocChildItem>
+	</ul>
+	<TocItem>[{heading60}](#heading60)</TocItem>
+</Toc>
+
+## {heading10}
+
+<figure>
+  <CustomPicture
+    src={`/assets/github-repository-push/quick-setup.png`}
+    alt="GitHubの「Quick setup」の画面"
+  />
+</figure>
+
+↑GitHubでリモートリポジトリを作ると、このような画面になります。今回は「test-html」という名前のリモートリポジトリを作りました。
+
+GitHubでリモートリポジトリを作る方法がわからない方は、以下の記事をどうぞ。
+
+<div class="related-post">
+  <a rel="prefetch" href={`/blog/post/${createGithubRepository.frontmatter.slug}/`}><figure><CustomPicture src={`/assets/${createGithubRepository.frontmatter.slug}/eyecatch.png`} alt={createGithubRepository.frontmatter.title} /></figure><h2>{createGithubRepository.frontmatter.title}</h2><div class="read">記事を読む</div></a>
+</div>
+
+## {heading20}
+
+次にやることは以下です。
+
+- Gitをインストールする
+- Gitの初期設定をする
+
+これがまだの方は、以下の記事をどうぞ。
+
+<div class="related-post">
+  <a rel="prefetch" href={`/blog/post/${gitInitialSetting.frontmatter.slug}/`}><figure><CustomPicture src={`/assets/${gitInitialSetting.frontmatter.slug}/eyecatch.png`} alt={gitInitialSetting.frontmatter.title} /></figure><h2>{gitInitialSetting.frontmatter.title}</h2><div class="read">記事を読む</div></a>
+</div>
+
+## {heading30}
+
+Gitは**コマンド操作**で使うことになります。
+
+Macの場合は、**ターミナル**でコマンド操作ができます。
+
+Windowsなら、「**Git Bash**」でコマンド操作をしましょう。「コマンドプロンプト」では、Gitは使えません。
+
+以下の記事を読めば、WindowsでGit Bashを使える状態になります。
+
+<div class="related-post">
+  <a rel="prefetch" href={`/blog/post/${installGitOnWindows.frontmatter.slug}/`}><figure><CustomPicture src={`/assets/${installGitOnWindows.frontmatter.slug}/eyecatch.png`} alt={installGitOnWindows.frontmatter.title} /></figure><h2>{installGitOnWindows.frontmatter.title}</h2><div class="read">記事を読む</div></a>
+</div>
+
+## {heading31}
+
+今回はデスクトップ上に「test-html」という名前のフォルダを作り、その中に「index.html」という名前のファイルを作ってみます。
+
+<figure>
+  <CustomPicture
+    src={`/assets/github-repository-push/test-html.png`}
+    alt="「test-html」というフォルダの中に「index.html」というファイルを作りコードを書いた"
+  />
+</figure>
+
+↑「index.html」の中には適当にコードを書いてみましょう。以下のようなコードを書きました。
+
+<div class="code-title">index.html</div>
+
+```html
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Test Html</title>
+  </head>
+  <body>
+    <h1>Hello, world!</h1>
+  </body>
+</html>
+```
+
+最終的には、今回作った「test-html」というフォルダをGitHubにpushします。
+
+## {heading40}
+
+これから、以下のことをやっていきます。
+
+- [{heading40_1}](#heading40_1)
+- [{heading40_2}](#heading40_2)
+- [{heading40_3}](#heading40_3)
+- [{heading40_4}](#heading40_4)
+
+<figure>
+  <CustomPicture
+    src={`/assets/github-repository-push/quick-setup.png`}
+    alt="GitHubの「Quick setup」の画面"
+  />
+</figure>
+
+↑基本的にはこの画面の通りにコマンドを実行するだけです。
+
+### {heading40_1}
+
+GitHubで作ったリポジトリは**リモートリポジトリ**です。それに対して、自分のパソコン上に作るリポジトリを**ローカルリポジトリ**といいます。
+
+まずはローカルリポジトリを作っていきます。
+
+コマンド操作で、作業場所を「test-html」にしましょう。ターミナルまたはGit Bashで以下のコマンドを入力します。
+
+<div class="code-title">ターミナル</div>
+
+```bash
+cd Desktop
+```
+
+次に、以下のコマンドを実行します。
+
+<div class="code-title">ターミナル</div>
+
+```bash
+cd test-html
+```
+
+そして、以下のコマンドを実行します。
+
+<div class="code-title">ターミナル</div>
+
+```bash
+git init
+```
+
+これで、ローカルリポジトリが作られました。
+
+### {heading40_2}
+
+ローカルリポジトリには、まだ何もない状態です。まずは**add**してましょう。以下のコマンドを実行します。
+
+<div class="code-title">ターミナル</div>
+
+```bash
+git add .
+```
+
+最後の「.」はピリオドです。これにより、「test-html」の中のファイルが全てaddされます。
+
+「個別にファイルを選んでaddしたい」という場合は以下のようにコマンドを実行します。たとえば、「index.html」のみをaddする場合です。
+
+<div class="code-title">ターミナル</div>
+
+```bash
+git add index.html
+```
+
+addできたら、次は以下のコマンドを実行します。
+
+<div class="code-title">ターミナル</div>
+
+```bash
+git commit -m "最初のコミットです"
+```
+
+「最初のコミットです」の部分は自由に決められます。これで、ローカルリポジトリにファイルが追加されました。
+
+こんな感じで、「git add」と「git commit」の**2段階のコマンド**でようやくローカルリポジトリにファイルが追加されます。
+
+初心者からすると「**なんで？**」って感じですよね。「**そもそもaddとcommitって何？**」って感じですよね。
+
+gitは意外と複雑です。ですが、転職を考えているならgitはマスターしましょう。なぜなら、gitは**複数人で開発するときに必須だから**です。
+
+「プログラミングで開発できること」も大事ですが、転職では「**複数人で協力して開発できること**」の方がもっと大事です。
+
+プログラミングで生きていきたいなら、転職したいなら、gitをマスターしましょう。教材としておすすめできるのは以下です。
+
+<p><a href="https://amzn.to/45hkiux" target="_blank" rel="nofollow noopener">>> 改訂2版 わかばちゃんと学ぶ Git使い方入門</a></p>
+
+できれば、このブログでgitのすべてを解説したいです。でも、この書籍ほどわかりやすく解説できる自信はないので、紹介させてもらいました。
+
+### {heading40_3}
+
+次に、以下のコマンドを実行してください。
+
+<div class="code-title">ターミナル</div>
+
+```bash
+git branch -M main
+```
+
+これで、**ローカルリポジトリの名前**が「**main**」に変わりました。ローカルリポジトリの名前はデフォルトで「master」になっています。
+
+今は「master」という表現は不適切とされています。GitHub公式では「main」という名前が推奨されているみたいです。
+
+次に、GitHubでリモートリポジトリを作ったときに表示されたページを開きます。
+
+<figure>
+  <CustomPicture
+    src={`/assets/github-repository-push/git-remote-add.png`}
+    alt="「git remote add ...」の部分をコピー"
+  />
+</figure>
+
+↑このページです。画像で示した部分のコマンドをコピーしてください。
+
+そして、ターミナルに貼り付けて実行します。
+
+<div class="code-title">ターミナル</div>
+
+```bash
+git remote add origin https://github.com/rala-rationallife/test-html.git
+```
+
+↑このコマンドは一例です。必ず先ほどのページのコマンドをコピーして貼り付けてください。
+
+これにより、ローカルリポジトリとリモートリポジトリをつなぐことができました。
+
+### {heading40_4}
+
+次にやることは、ローカルリポジトリに追加したファイルをリモートリポジトリに移す作業です。
+
+では、以下のコマンドを入力して実行してください。
+
+<div class="code-title">ターミナル</div>
+
+```bash
+git push -u origin main
+```
+
+ターミナル上で**GitHubのパスワード**を聞いてきたら入力します。
+
+<figure>
+  <CustomPicture
+    src={`/assets/github-repository-push/complete-push.png`}
+    alt="「index.html」が追加されている"
+  />
+</figure>
+
+↑先ほど開いていたGitHubのページを<strong>更新（リロード）</strong>してみてください。すると、このようなページが表示されます。
+
+「index.html」が、GitHubのリモートリポジトリに追加されているのが分かります。
+
+## {heading50}
+
+次は以下のことをやってみましょう。
+
+- ファイルの内容を修正する
+- リモートリポジトリにまたpushする
+
+リモートリポジトリに追加したファイルの内容は簡単に更新できます。
+
+リモートリポジトリに追加したファイルをいったん全部消してから追加し直す...なんて面倒なことはしなくていいんです。
+
+実際にやっていきます。
+
+### {heading50_1}
+
+<figure>
+  <CustomPicture
+    src={`/assets/github-repository-push/add-file.png`}
+    alt="pタグを追加し、CSSファイルを追加してみた"
+  />
+</figure>
+
+↑ファイルの内容を修正してみました。
+
+どう変えてもいいんですが、上の画像では「index.html」の中にpタグを追加してみました。また、「style.css」というファイルも新たに作りました。
+
+### {heading50_2}
+
+修正したファイルをまたリモートリポジトリにpushしていきます。
+
+まずは、ローカルリポジトリにファイルを追加します。ターミナルで以下のコマンドを実行してください。
+
+<div class="code-title">ターミナル</div>
+
+```bash
+git add .
+```
+
+続いて、以下のコマンドを実行します。
+
+<div class="code-title">ターミナル</div>
+
+```bash
+git commit -m "ファイルを修正してみた"
+```
+
+「ファイルを修正してみた」の部分は、何でもいいです。これで、ローカルリポジトリにファイルが追加されました。
+
+あとは以下のコマンドを入力して実行します。
+
+<div class="code-title">ターミナル</div>
+
+```bash
+git push
+```
+
+これで、リモートリポジトリが更新されます。
+
+一番最初のpushでは「git push 〜」みたいな長いコマンドを実行しました。でも2回目以降はこのように「git push」だけで大丈夫です。
+
+### {heading50_3}
+
+ではGitHubのページを更新（リロード）してみてください。
+
+<figure>
+  <CustomPicture
+    src={`/assets/github-repository-push/click-index2.png`}
+    alt="「index.html」をクリック"
+  />
+</figure>
+
+↑リモートリポジトリの中に「**style.css**」が追加されているのがわかります。
+
+「index.html」の中身も確認してみましょう。上の画像のように、「index.html」をクリックしてください。
+
+<figure>
+  <CustomPicture
+    src={`/assets/github-repository-push/confirm-ptag.png`}
+    alt="pタグが追加されている"
+  />
+</figure>
+
+↑「index.html」の中身を見ると、**pタグ**が追加されていることがわかります。これで、修正したファイルがリモートリポジトリにも反映されました。
+
+## {heading60}
+
+コマンドラインを使って**GitHubのリモートリポジトリにファイルを追加する手順**を、最後にまとめます。
+
+手順は以下です。
+
+- [{heading10}](#heading10)
+- [{heading20}](#heading20)
+- [{heading40_1}](#heading40_1)
+- [{heading40_2}](#heading40_2)
+- [{heading40_3}](#heading40_3)
+- [{heading40_4}](#heading40_4)
+
+というわけで、記事は以上です。

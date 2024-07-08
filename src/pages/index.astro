@@ -1,17 +1,51 @@
 ---
 import Layout from "@layouts/layout.astro";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBars, faXmark } from "@fortawesome/free-solid-svg-icons";
 ---
 
 <Layout>
   <div class="container">
     <h1>Tech Flow.</h1>
+
+    <button id="bars" class="bars">
+      <FontAwesomeIcon icon={faBars} />
+    </button>
+
+    <button id="xmark" class="xmark">
+      <FontAwesomeIcon icon={faXmark} />
+    </button>
   </div>
 </Layout>
+
+<script>
+  document.getElementById("bars")?.addEventListener("click", () => {
+    document.querySelector("html")?.classList.add("open");
+  });
+
+  document.getElementById("xmark")?.addEventListener("click", () => {
+    document.querySelector("html")?.classList.remove("open");
+  });
+</script>
 
 <style is:global>
   main {
     display: grid;
     grid-template-columns: subgrid;
+  }
+
+  .xmark {
+    display: none;
+  }
+
+  .open {
+    .bars {
+      display: none;
+    }
+
+    .xmark {
+      display: block;
+    }
   }
 </style>
 
